@@ -9,7 +9,7 @@ function initialize() {
 }
 
 var friendsLoc = new Array();
-
+var myLoc;
 function runLoader() {
   // Create an instance of FacebookLoader
   // and store it in a variable called loader
@@ -22,9 +22,40 @@ function runLoader() {
       friendsLoc[i][1] = friends[i].getHometown();
       friendsLoc[i][2] = friendsLoc[i][1].getId();
       friendsLoc[i][1] = friendsLoc[i][1].getName();
+    var myLoc = my_profile.getHometown();
     }
   });
 }
+
+function findDist(dest){
+  var service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+  {
+  origins:[myLoc]
+  destinations:[dest]
+},callback)
+var distance;
+
+function callback(response, status) {
+  alert(status)
+  if (status == google.maps.DistanceMatrixStatus.OK) {
+    var origins = response.originAddresses;
+    var destinations = response.destinationAddresses;
+
+    for (var i = 0; i < origins.length; i++) {
+      var results = response.rows[i].elements;
+      for (var j = 0; j < results.length; j++) {
+        var element = results[j];
+        var distance = element.distance.text;
+        var duration = element.duration.text;
+        var from = origins[i];
+        var to = destinations[j];
+      }
+    }
+  }
+}
+
+
 
 function plotPoint(data, map) {
   var marker = new google.maps.Marker({
