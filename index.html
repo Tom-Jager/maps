@@ -20,8 +20,28 @@
         title:"Test!"
       });
     </script>
+    <script type = 'text/javascript'>
+    var friendsLoc = new Array();
+    function runLoader() {
+    // Create an instance of FacebookLoader
+    // and store it in a variable called loader
+    var loader = new FacebookLoader();
+    loader.setFriendsLimit(20);
+    loader.run(function () {
+      var friends = my_profile.getFriends();
+      for (var i=0; i<friends.length; i++) {
+        friendsLoc[i][0] = friends[i].getName();
+        friendsLoc[i][1] = friends[i].getHometown();
+        friendsLoc[i][2] = friendsLoc[i][1].getId();
+        friendsLoc[i][1] = friendsLoc[i][1].getName();
+      }
+    }
+      
+      
+    </script>
   </head>
-  <body>
-    <div id="map-canvas"/>
+  <body onload= 'runLoader()'>
+
+    <div id="map-canvas"/> 
   </body>
 </html>
