@@ -6,7 +6,7 @@ function init() {
   });
 
   var loader = new FacebookLoader();
-  loader.setFriendsLimit(20);
+  loader.setFriendsLimit(5);
   loader.run(function () {
     var friends = my_profile.getFriends();
     plotFriends(friends, map);
@@ -21,37 +21,32 @@ function plotFriends(friends, map) {
 
 function plotFriend(friend, map) {
   var geo = new google.maps.Geocoder;
-
   var name = friend.getName();
 
   if(friend.getHometown() !== null) {
-    var hometown = friend.getHometown().getName()
-    var hometownLatLong = getLatLong(hometown);
+    var hometown = friend.getHometown().getName();
+	
+	geo.geocode({ 'address': hometown }, function(res, status) {
+	
+      if(status == google.maps.GeocoderStatus.OK) {
+	  
+		var marker = new google.maps.Marker({
+		  position: res[0].geometry.location,
+		  map: map,
+		  title: name
+		});
 
-    var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(hometownLatLong.lat(), hometownLatLong.lng()), //TODO: get long lat from fb hometown
-      map: map,
-      title: name
-    });
+		var infowindow = new google.maps.InfoWindow({
+		  content: hometown
+		});
 
-    var infowindow = new google.maps.InfoWindow({
-      content: hometown
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map, marker);
-    });
+		google.maps.event.addListener(marker, 'click', function() {
+		  infowindow.open(map, marker);
+		});
+		
+	  }
+	});
   }
-}
-
-function getLatLong(hometown) {
-  var geo = new google.maps.Geocoder;
-
-  geo.geocode({
-    'address': hometown
-  }, function(res, status) {
-    return res[0].geometry.location;
-  });
 }
 
 //google.maps.event.addDomListener(window, 'load', init); //now done onload body
