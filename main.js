@@ -27,30 +27,26 @@ function plotMe(me, map) {
 
   geo.geocode({ 'address': hometown }, function(res, status) {
 
-      if(status == google.maps.GeocoderStatus.OK) {
+    if(status == google.maps.GeocoderStatus.OK) {
 
-    var marker = new google.maps.Marker({
-      position: res[0].geometry.location,
-      map: map,
-      title: hometown,
-      icon: {
-        path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-        strokeColor: 'blue',
-        scale: 3
-      } //TODO
-    });
+      var marker = new google.maps.Marker({
+        position: res[0].geometry.location,
+        map: map,
+        title: hometown,
+        draggable: true
+      });
 
-    var infowindow = new google.maps.InfoWindow({
-      content: "Me!"
-    });
+      var infowindow = new google.maps.InfoWindow({
+        content: "Me!"
+      });
 
-    google.maps.event.addListener(marker, 'mouseover', function() {
-      infowindow.open(map, marker);
-    });
+      google.maps.event.addListener(marker, 'mouseover', function() {
+        infowindow.open(map, marker);
+      });
 
-    google.maps.event.addListener(marker, 'mouseout', function() {
-      infowindow.close(map, marker);
-    });
+      google.maps.event.addListener(marker, 'mouseout', function() {
+        infowindow.close(map, marker);
+      });
 
     }
   });
@@ -66,35 +62,37 @@ function plotFriends(friends, map) {
 function plotFriend(friend, map, i) {
   var geo = new google.maps.Geocoder;
   var name = friend.getName();
+  var profilePic = friends.getPicture();
 
   if(friend.getHometown() !== null) {
     var hometown = friend.getHometown().getName();
 
 	geo.geocode({ 'address': hometown }, function(res, status) {
 
-      if(status == google.maps.GeocoderStatus.OK) {
+    if(status == google.maps.GeocoderStatus.OK) {
 
-		var marker = new google.maps.Marker({
-		  position: res[0].geometry.location,
-		  map: map,
-		  title: hometown
-		});
+  		var marker = new google.maps.Marker({
+  		  position: res[0].geometry.location,
+  		  map: map,
+  		  title: hometown,
+        icon: profilePic
+  		});
 
-    markers[i] = marker;
+      markers[i] = marker;
 
-		var infowindow = new google.maps.InfoWindow({
-		  content: "Name: " + name
-		});
+  		var infowindow = new google.maps.InfoWindow({
+  		  content: "Name: " + name
+  		});
 
-    infowindows[i] = infowindow;
+      infowindows[i] = infowindow;
 
-    google.maps.event.addListener(marker, 'mouseover', function() {
-      infowindow.open(map, marker);
-    });
+      google.maps.event.addListener(marker, 'mouseover', function() {
+        infowindow.open(map, marker);
+      });
 
-    google.maps.event.addListener(marker, 'mouseout', function() {
-      infowindow.close(map, marker);
-    });
+      google.maps.event.addListener(marker, 'mouseout', function() {
+        infowindow.close(map, marker);
+      });
 
 	  }
 	});
