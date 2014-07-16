@@ -47,7 +47,7 @@ function getLatLong(hometown) {
   geo.geocode({
     'address': hometown
   }, function(res, status) {
-    return res;
+    return res[0].geometry.location;
   });
 }
 
