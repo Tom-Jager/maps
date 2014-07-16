@@ -7,7 +7,7 @@ function init() {
 
   var loader = new FacebookLoader();
   loader.setFriendsLimit(20);
-  loader.run(function (my_profile) {
+  loader.run(function () {
     var friends = my_profile.getFriends();
     plotFriends(friends, map);
   });
