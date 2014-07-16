@@ -1,3 +1,4 @@
+var myMarker;
 var markers = [];
 var infowindows = [];
 
@@ -13,7 +14,43 @@ function init() {
   loader.run(function () {
     var friends = my_profile.getFriends();
     plotFriends(friends, map);
+    plotMe(my_profile, map);
   });
+}
+
+//TODO
+function plotMe(me, map) {
+  var geo = new google.maps.Geocoder;
+
+  if(me.getHometown() !== null) {
+    var hometown = me.getHometown().getName();
+
+  geo.geocode({ 'address': hometown }, function(res, status) {
+
+      if(status == google.maps.GeocoderStatus.OK) {
+
+    var marker = new google.maps.Marker({
+      position: res[0].geometry.location,
+      map: map,
+      title: hometown,
+      color: blue //TODO
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+      content: "Me!"
+    });
+
+    google.maps.event.addListener(marker, 'mouseover', function() {
+      infowindow.open(map, marker);
+    });
+
+    google.maps.event.addListener(marker, 'mouseout', function() {
+      infowindow.close(map, marker);
+    });
+
+    }
+  });
+  }
 }
 
 function plotFriends(friends, map) {
