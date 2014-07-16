@@ -11,7 +11,7 @@ function init() {
   });
 
   var loader = new FacebookLoader();
-  loader.setFriendsLimit(5);
+  loader.setFriendsLimit(200);
   loader.run(function () {
     var friends = my_profile.getFriends();
     plotFriends(friends, map);
