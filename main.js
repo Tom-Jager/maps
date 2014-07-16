@@ -1,4 +1,5 @@
 var points = [];
+var infowindows = [];
 
 function init() {
   var map = new google.maps.Map(document.getElementById("map-canvas"), {
@@ -34,22 +35,18 @@ function plotFriends(friends, map) {
             title: name
           });
 
-          var infowindow = new google.maps.InfoWindow({
+          infowindows[i] = new google.maps.InfoWindow({
             content: hometown
           });
 
           google.maps.event.addListener(points[i], 'click', function() {
-            infowindow.open(map, points[i]);
+            infowindows[i].open(map, points[i]);
           });
 
         }
       });
     }
   }
-}
-
-function plotFriend(friend, map, i) {
-
 }
 
 //google.maps.event.addDomListener(window, 'load', init); //now done onload body
