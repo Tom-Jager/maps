@@ -18,7 +18,6 @@ function init() {
   });
 }
 
-//TODO
 function plotMe(me, map) {
   var geo = new google.maps.Geocoder;
 
@@ -77,8 +76,10 @@ function plotFriend(friend, map, i) {
   		  title: hometown,
         icon: profilePic
   		});
-      alert(marker);
-      jQuery(marker).css("border-radius: 5px;");
+      //TODO: border-radius of icons
+
+      marker.id = 'yo' + i;
+      jQuery('yo' + i).css('border-radius: 5px;');
 
       markers[i] = marker;
 
