@@ -23,22 +23,24 @@ function plotFriend(friend, map) {
   var geo = new google.maps.Geocoder;
 
   var name = friend.getName();
-  var hometown = friend.getHometown().getName();
-  var hometownLatLong = getLatLong(hometown);
+  
+  if(var hometown = friend.getHometown().getName()) {
+    var hometownLatLong = getLatLong(hometown);
 
-  var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(hometownLatLong.lat(), hometownLatLong.lng()), //TODO: get long lat from fb hometown
-    map: map,
-    title: name
-  });
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(hometownLatLong.lat(), hometownLatLong.lng()), //TODO: get long lat from fb hometown
+      map: map,
+      title: name
+    });
 
-  var infowindow = new google.maps.InfoWindow({
-    content: hometown
-  });
+    var infowindow = new google.maps.InfoWindow({
+      content: hometown
+    });
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map, marker);
-  });
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map, marker);
+    });
+  }
 }
 
 function getLatLong(hometown) {
