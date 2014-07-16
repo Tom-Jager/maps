@@ -78,6 +78,8 @@ function plotFriend(friend, map, i) {
         icon: profilePic
   		});
 
+      $(marker.id).css("border-radius: 5px;")
+
       markers[i] = marker;
 
   		var infowindow = new google.maps.InfoWindow({
