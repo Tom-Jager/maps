@@ -78,7 +78,7 @@ function plotFriend(friend, map, i) {
         icon: profilePic
   		});
 
-      Jquery(marker.id).css("border-radius: 5px;")
+      jQuery(marker.id).css("border-radius: 5px;")
 
       markers[i] = marker;
 
