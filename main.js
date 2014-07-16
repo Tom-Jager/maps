@@ -63,6 +63,7 @@ function plotFriend(friend, map, i) {
   var geo = new google.maps.Geocoder;
   var name = friend.getName();
   var profilePic = friend.getPicture();
+  var pointExists = false;
 
   if(friend.getHometown() !== null) {
     var hometown = friend.getHometown().getName();
@@ -70,9 +71,6 @@ function plotFriend(friend, map, i) {
   	geo.geocode({ 'address': hometown }, function(res, status) {
 
       if(status == google.maps.GeocoderStatus.OK) {
-        markers[i] = marker;
-
-        var pointExists = false;
 
         for(var i = 0; i < places.length; i++) {
           if(res[0].geometry.location == places[i]) {
@@ -89,6 +87,8 @@ function plotFriend(friend, map, i) {
             title: hometown,
             icon: profilePic
           });
+
+          markers[i] = marker;
 
           //TODO: border-radius of icons
 
