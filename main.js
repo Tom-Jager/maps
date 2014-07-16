@@ -20,11 +20,14 @@ function plotFriends(friends, map) {
 }
 
 function plotFriend(friend, map) {
+  var geo = new google.maps.Geocoder;
+
   var name = friend.getName();
   var hometown = friend.getHometown().getName();
+  var hometownLatLong = getLatLong(hometown);
 
   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(51.5072, 0.1275), //TODO: get long lat from fb hometown
+    position: new google.maps.LatLng(hometownLatLong.lat(), hometownLatLong.lng()), //TODO: get long lat from fb hometown
     map: map,
     title: name
   });
@@ -35,6 +38,16 @@ function plotFriend(friend, map) {
 
   google.maps.event.addListener(marker, 'click', function() {
     infowindow.open(map, marker);
+  });
+}
+
+function getLatLong(hometown) {
+  var geo = new google.maps.Geocoder;
+
+  geo.geocode({
+    'address': hometown
+  }, function(res, status) {
+    return res;
   });
 }
 
