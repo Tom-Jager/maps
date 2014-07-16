@@ -33,7 +33,7 @@ function plotMe(me, map) {
       position: res[0].geometry.location,
       map: map,
       title: hometown,
-      color: blue //TODO
+      color: '#0000ff' //TODO
     });
 
     var infowindow = new google.maps.InfoWindow({
