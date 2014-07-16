@@ -72,35 +72,39 @@ function plotFriend(friend, map, i) {
       if(status == google.maps.GeocoderStatus.OK) {
         markers[i] = marker;
 
+        var pointExists = false;
+
         for(var i = 0; i < places.length; i++) {
           if(res[0].geometry.location == places[i]) {
-            //plot next to it
-          } else {
-            places[places.length] = res[0].geometry.location;
-
-            var marker = new google.maps.Marker({
-              position: res[0].geometry.location,
-              map: map,
-              title: hometown,
-              icon: profilePic
-            });
-
-            //TODO: border-radius of icons
-
-            var infowindow = new google.maps.InfoWindow({
-              content: "Name: " + name
-            });
-
-            infowindows[i] = infowindow;
-
-            google.maps.event.addListener(marker, 'mouseover', function() {
-              infowindow.open(map, marker);
-            });
-
-            google.maps.event.addListener(marker, 'mouseout', function() {
-              infowindow.close(map, marker);
-            });
+            pointExists = true;
           }
+        }
+
+        if(!pointExists) {
+          places[places.length] = res[0].geometry.location;
+
+          var marker = new google.maps.Marker({
+            position: res[0].geometry.location,
+            map: map,
+            title: hometown,
+            icon: profilePic
+          });
+
+          //TODO: border-radius of icons
+
+          var infowindow = new google.maps.InfoWindow({
+            content: "Name: " + name
+          });
+
+          infowindows[i] = infowindow;
+
+          google.maps.event.addListener(marker, 'mouseover', function() {
+            infowindow.open(map, marker);
+          });
+
+          google.maps.event.addListener(marker, 'mouseout', function() {
+            infowindow.close(map, marker);
+          });
         }
   	  }
   	});
