@@ -1,3 +1,6 @@
+var markers = [];
+var infowindows = [];
+
 function init() {
   var map = new google.maps.Map(document.getElementById("map-canvas"), {
     center: new google.maps.LatLng(0, 0),
@@ -15,11 +18,11 @@ function init() {
 
 function plotFriends(friends, map) {
   for(var i = 0; i < friends.length; i++) {
-    plotFriend(friends[i], map);
+    plotFriend(friends[i], map, i);
   }
 }
 
-function plotFriend(friend, map) {
+function plotFriend(friend, map, i) {
   var geo = new google.maps.Geocoder;
   var name = friend.getName();
 
@@ -36,9 +39,13 @@ function plotFriend(friend, map) {
 		  title: name
 		});
 
+    markers[i] = marker;
+
 		var infowindow = new google.maps.InfoWindow({
 		  content: hometown
 		});
+
+    infowindows[i] = infowindow;
 
 		google.maps.event.addListener(marker, 'click', function() {
 		  infowindow.open(map, marker);
