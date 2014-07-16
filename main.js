@@ -18,12 +18,13 @@ function init() {
 
 function plotFriends(friends, map) {
   var geo = new google.maps.Geocoder;
+  var name, hometown;
 
   for(var i = 0; i < friends.length; i++) {
-    var name = friends[i].getName();
+    name = friends[i].getName();
 
     if(friends[i].getHometown() !== null) {
-      var hometown = friends[i].getHometown().getName();
+      hometown = friends[i].getHometown().getName();
 
       geo.geocode({ 'address': hometown }, function(res, status) {
 
