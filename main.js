@@ -1,3 +1,5 @@
+var points = [];
+
 function init() {
   var map = new google.maps.Map(document.getElementById("map-canvas"), {
     center: new google.maps.LatLng(0, 0),
@@ -14,39 +16,40 @@ function init() {
 }
 
 function plotFriends(friends, map) {
+  var geo = new google.maps.Geocoder;
+
   for(var i = 0; i < friends.length; i++) {
-    plotFriend(friends[i], map);
+    var name = friends[i].getName();
+
+    if(friend.getHometown() !== null) {
+      var hometown = friends[i].getHometown().getName();
+
+      geo.geocode({ 'address': hometown }, function(res, status) {
+
+        if(status == google.maps.GeocoderStatus.OK) {
+
+          points[i] = new google.maps.Marker({
+            position: res[0].geometry.location,
+            map: map,
+            title: name
+          });
+
+          var infowindow = new google.maps.InfoWindow({
+            content: hometown
+          });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map, marker);
+          });
+
+        }
+      });
+    }
   }
 }
 
-function plotFriend(friend, map) {
-  var geo = new google.maps.Geocoder;
-  var name = friend.getName();
+function plotFriend(friend, map, i) {
 
-  if(friend.getHometown() !== null) {
-    var hometown = friend.getHometown().getName();
-	
-	geo.geocode({ 'address': hometown }, function(res, status) {
-	
-      if(status == google.maps.GeocoderStatus.OK) {
-	  
-		var marker = new google.maps.Marker({
-		  position: res[0].geometry.location,
-		  map: map,
-		  title: name
-		});
-
-		var infowindow = new google.maps.InfoWindow({
-		  content: hometown
-		});
-
-		google.maps.event.addListener(marker, 'click', function() {
-		  infowindow.open(map, marker);
-		});
-		
-	  }
-	});
-  }
 }
 
 //google.maps.event.addDomListener(window, 'load', init); //now done onload body
