@@ -23,8 +23,9 @@ function plotFriend(friend, map) {
   var geo = new google.maps.Geocoder;
 
   var name = friend.getName();
-  
-  if(var hometown = friend.getHometown().getName()) {
+
+  if(friend.getHometown().getName() !== null) {
+    var hometown = friend.getHometown().getName()
     var hometownLatLong = getLatLong(hometown);
 
     var marker = new google.maps.Marker({
