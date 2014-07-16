@@ -21,7 +21,7 @@ function plotFriends(friends, map) {
   for(var i = 0; i < friends.length; i++) {
     var name = friends[i].getName();
 
-    if(friend.getHometown() !== null) {
+    if(friends[i].getHometown() !== null) {
       var hometown = friends[i].getHometown().getName();
 
       geo.geocode({ 'address': hometown }, function(res, status) {
