@@ -80,6 +80,7 @@ function plotFriend(friend, map, i) {
 
         if(!pointExists) {
           places[places.length] = res[0].geometry.location;
+          alert(places.length);
 
           var marker = new google.maps.Marker({
             position: res[0].geometry.location,
