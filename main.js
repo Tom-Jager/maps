@@ -24,7 +24,7 @@ function plotFriend(friend, map) {
 
   var name = friend.getName();
 
-  if(friend.getHometown().getName() !== null) {
+  if(friend.getHometown() !== null) {
     var hometown = friend.getHometown().getName()
     var hometownLatLong = getLatLong(hometown);
 
