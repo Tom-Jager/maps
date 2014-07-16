@@ -38,8 +38,8 @@ function plotFriends(friends, map) {
             content: hometown
           });
 
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map, marker);
+          google.maps.event.addListener(points[i], 'click', function() {
+            infowindow.open(map, points[i]);
           });
 
         }
