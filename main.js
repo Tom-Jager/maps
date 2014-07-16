@@ -36,13 +36,13 @@ function plotFriend(friend, map, i) {
 		var marker = new google.maps.Marker({
 		  position: res[0].geometry.location,
 		  map: map,
-		  title: name
+		  title: hometown
 		});
 
     markers[i] = marker;
 
 		var infowindow = new google.maps.InfoWindow({
-		  content: hometown
+		  content: "Name: " + name
 		});
 
     infowindows[i] = infowindow;
