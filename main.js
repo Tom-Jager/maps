@@ -33,7 +33,7 @@ function plotMe(me, map) {
       position: res[0].geometry.location,
       map: map,
       title: hometown,
-      color: '#0000ff' //TODO
+      icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' //TODO
     });
 
     var infowindow = new google.maps.InfoWindow({
