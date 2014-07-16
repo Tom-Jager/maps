@@ -12,7 +12,23 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeI4wHj4qFTdc4NO-OrLcwHY0zLn-nB38"></script>
     <script type="text/javascript" src="main.js"></script>
   </head>
-  <body onload="init();">
-    <div id="map-canvas"/>
+  <body>
+    <h1 style="color:#3B5998; font-family:'Comic Sans MS', cursive, sans-serif";>Facemap</h1>
+	<button type="button" onclick="init()">Find your Friends!</button>
+	<div>
+	</br>	
+	<label>Max Friends</label>
+	<select id="setFriends" align="right">
+		
+		<option value=5>5</option>
+		<option value=10>10</option>
+		<option value=15>15</option>
+		<option value=20>20</option>
+		<option value=25>25</option>
+		<option value=30>30</option>
+	</select>			
+	</div>
+	</br>	
+	<div id="map-canvas" style="width:1000px; float:left;" />
   </body>
 </html>
