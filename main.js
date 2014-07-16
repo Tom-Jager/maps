@@ -11,7 +11,7 @@ function init() {
   var loader = new FacebookLoader();
   loader.setFriendsLimit(5);
   loader.run(function () {
-    var friends = my_profile.getFriends();
+    var friends = profile.getFriends();
     plotFriends(friends, map);
   });
 }
@@ -22,8 +22,8 @@ function plotFriends(friends, map) {
 
   for(var i = 0; i < friends.length; i++) {
     name = friends[i].getName();
-
     if(friends[i].getHometown() !== null) {
+
       hometown = friends[i].getHometown().getName();
 
       geo.geocode({ 'address': hometown }, function(res, status) {
