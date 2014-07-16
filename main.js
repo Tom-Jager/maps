@@ -62,7 +62,7 @@ function plotFriends(friends, map) {
 function plotFriend(friend, map, i) {
   var geo = new google.maps.Geocoder;
   var name = friend.getName();
-  var profilePic = friends.getPicture();
+  var profilePic = friend.getPicture();
 
   if(friend.getHometown() !== null) {
     var hometown = friend.getHometown().getName();
