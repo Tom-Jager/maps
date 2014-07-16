@@ -67,44 +67,43 @@ function plotFriend(friend, map, i) {
   if(friend.getHometown() !== null) {
     var hometown = friend.getHometown().getName();
 
-	geo.geocode({ 'address': hometown }, function(res, status) {
+  	geo.geocode({ 'address': hometown }, function(res, status) {
 
-    if(status == google.maps.GeocoderStatus.OK) {
-      markers[i] = marker;
+      if(status == google.maps.GeocoderStatus.OK) {
+        markers[i] = marker;
 
-      for(var i = 0; i < places.length; i++) {
-        if(res[0].geometry.location == places[i]) {
-          //plot next to it
-        } else {
-          places[places.length] = res[0].geometry.location;
+        for(var i = 0; i < places.length; i++) {
+          if(res[0].geometry.location == places[i]) {
+            //plot next to it
+          } else {
+            places[places.length] = res[0].geometry.location;
 
-          var marker = new google.maps.Marker({
-            position: res[0].geometry.location,
-            map: map,
-            title: hometown,
-            icon: profilePic
-          });
+            var marker = new google.maps.Marker({
+              position: res[0].geometry.location,
+              map: map,
+              title: hometown,
+              icon: profilePic
+            });
 
-          //TODO: border-radius of icons
+            //TODO: border-radius of icons
+
+            var infowindow = new google.maps.InfoWindow({
+              content: "Name: " + name
+            });
+
+            infowindows[i] = infowindow;
+
+            google.maps.event.addListener(marker, 'mouseover', function() {
+              infowindow.open(map, marker);
+            });
+
+            google.maps.event.addListener(marker, 'mouseout', function() {
+              infowindow.close(map, marker);
+            });
+          }
         }
-      }
-
-  		var infowindow = new google.maps.InfoWindow({
-  		  content: "Name: " + name
-  		});
-
-      infowindows[i] = infowindow;
-
-      google.maps.event.addListener(marker, 'mouseover', function() {
-        infowindow.open(map, marker);
-      });
-
-      google.maps.event.addListener(marker, 'mouseout', function() {
-        infowindow.close(map, marker);
-      });
-
-	  }
-	});
+  	  }
+  	});
   }
 }
 
